@@ -1,7 +1,7 @@
 MathParser
 ==========
 
-Evaluates math expressions. Uses Haxe.
+Evaluates math expressions. Uses Haxe. I think it could be used in all platforms, no dependencies on haxe libs/OpenFl/Flambe.
 
 ### Examples
 
