@@ -20,5 +20,8 @@ MathParser.parse("(1+2- -3)/(((4*.5)))");
 
 MathParser.parse("(.1+.2- -.3)/(.4*.5)"); 
 // returns 3.0000000000000004
+
+MathParser.parse("0xFF * 10"); 
+// returns 2550
 ```
 _The parser assumes that the given expression is valid_
