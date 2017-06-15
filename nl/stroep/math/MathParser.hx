@@ -67,7 +67,8 @@ class MathParser {
 		var isPrevOperator:Bool = true;
 
 		for (expr in expression.split("")) {
-			if (expr==("*") ||
+			if (expr==("^") ||
+				expr==("*") ||
 				expr==("+") ||
 				(expr==("-") && !isPrevOperator) ||
 				expr==("(") ||
@@ -90,6 +91,22 @@ class MathParser {
 		// parse values to floats
 		var values = expressions.map(function(x) return x.indexOf (".")!=-1 ? Std.parseFloat(x) : cast Std.parseInt(x));
 
+		// exponentiation
+		var exponentIndex = operators.lastIndexOf("^");
+
+		while (true) {
+			if (exponentIndex != -1) {
+				values[exponentIndex] = Math.pow(values[exponentIndex], values[exponentIndex + 1]);
+
+				values.splice(exponentIndex + 1, 1);
+				operators.splice(exponentIndex, 1);
+			}
+			
+			exponentIndex = operators.lastIndexOf("^");
+
+			if (exponentIndex == -1) break;
+		}
+		
 		// multiply and devide
 		var multiplyIndex = operators.indexOf("*");
 		var devideIndex = operators.indexOf("/");
