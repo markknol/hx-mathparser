@@ -16,13 +16,14 @@ haxe:
 install:
   - haxelib install hxnodejs
   - haxelib install hxjava
+  - haxelib install hxcs
   - haxelib install all
   - haxelib list
 
 script:
   - haxe test.hxml --interp
   - haxe test.hxml -js bin/test.js -lib hxnodejs
-  - node test.js
+  - node bin/test.js
   - haxe test.hxml -neko bin/test.n
   - neko bin/test.n
   - haxe test.hxml -neko bin/test.n
