@@ -26,7 +26,7 @@ class Assert {
     }
     var e = map(e);
     var a = [for (i in 0...el.length) macro { expr: $v{descs[i]}, value: $i{"_tmp" + i} }];
-    el.push(macro if (!$e) @:pos(p) throw new Assert.Message($v{s}, $a{a}).toString() else trace(new Assert.Message($v{s}, $a{a}).toString()));
+    el.push(macro if (!$e) @:pos(p) throw new Assert.Message(false, $v{s}, $a{a}).toString() else trace(new Assert.Message(true, $v{s}, $a{a}).toString()));
     return macro $b{el};
   }
 }
@@ -38,15 +38,21 @@ private typedef AssertionPart = {
 
 class Message {
   public var message(default, null):String;
+  public var success(default, null):Bool;
   public var parts(default, null):Array<AssertionPart>;
-  public inline function new(message:String, parts:Array<AssertionPart>) {
-    this.message = message;
+  
+  public inline function new(success:Bool, message:String, parts:Array<AssertionPart>) {
+    this.success = success;
+	this.message = message;
     this.parts = parts;
   }
 
   public inline function toString() {
     var buf = new StringBuf();
-    buf.add("Assertion failure: " + message);
+	
+    if (success) buf.add("Assertion success: " + message);
+	else buf.add("Assertion failure: " + message);
+	
     for (part in parts) {
         buf.add("\n\t" + part.expr + ": " + part.value);
     }
