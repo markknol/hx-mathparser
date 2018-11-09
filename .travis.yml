@@ -1,0 +1,35 @@
+language: haxe
+
+os:
+  - linux
+  - osx
+  - windows
+
+sudo: false
+dist: trusty
+
+haxe:
+  - "3.4.0"
+  - stable
+  - development
+
+install:
+  - haxelib install hxnodejs
+  - haxelib install hxjava
+  - haxelib install all
+  - haxelib list
+
+script:
+  - haxe test.hxml --interp
+  - haxe test.hxml -js bin/test.js -lib hxnodejs
+  - node test.js
+  - haxe test.hxml -neko bin/test.n
+  - neko bin/test.n
+  - haxe test.hxml -neko bin/test.n
+  - neko bin/test.n
+  - haxe test.hxml -python bin/test.py
+  - python bin/test.py
+  - haxe test.hxml -java bin/java
+  - java bin/java/Test.jar
+  - haxe test.hxml -cs bin/cs
+  - "bin/cs/bin/Test.exe"

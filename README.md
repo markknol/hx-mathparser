@@ -16,7 +16,7 @@ MathParser.parse("(1+2--3)/4*5");
 // returns 7.5
 
 MathParser.parse("(1+2- -3)/(((4*.5)))"); 
-// returns 0.3
+// returns 3.0
 
 MathParser.parse("(.1+.2- -.3)/(.4*.5)"); 
 // returns 3.0000000000000004
