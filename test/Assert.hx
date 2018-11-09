@@ -26,7 +26,7 @@ class Assert {
     }
     var e = map(e);
     var a = [for (i in 0...el.length) macro { expr: $v{descs[i]}, value: $i{"_tmp" + i} }];
-    el.push(macro if (!$e) @:pos(p) throw new Assert.Message($v{s}, $a{a}) else trace(new Assert.Message($v{s}, $a{a})));
+    el.push(macro if (!$e) @:pos(p) throw new Assert.Message($v{s}, $a{a}).toString() else trace(new Assert.Message($v{s}, $a{a}).toString()));
     return macro $b{el};
   }
 }
