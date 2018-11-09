@@ -1,3 +1,5 @@
 -cp src
 -cp test
+-dce full
+-D analyzer-optimize
 -main Test
